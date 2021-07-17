@@ -1,25 +1,18 @@
 import { createAction, handleActions } from "redux-actions";
-import { actionCreators as imageActions } from "./Image_module";
 import { produce } from "immer";
 import { config } from "../../shared/config";
 import { getCookie } from "../../shared/Cookie";
 
 import axios from "axios";
-import { post } from "request";
 
 // actions
 const GET_POST = "GET_POST"; // 정보 불러오기
-const EDIT_POST = "EDIT_POST"; // 정보 수정하기
 const LOADING = "LOADING"; // 로딩하기
 const TOGGLE_LIKE = "TOGGLE_LIKE"; // 좋아요 토글
 
 //action creators
 const getPost = createAction(GET_POST, (post_list) => ({
   post_list,
-}));
-const editPost = createAction(EDIT_POST, (post_id, post) => ({
-  post_id,
-  post,
 }));
 const loading = createAction(LOADING, (is_loading) => ({
   is_loading,
@@ -94,7 +87,7 @@ const toggleLikeDB = (post_id) => {
     let like_cnt = _post.like_cnt;
     let is_like = _post.is_like;
 
-    if (post_id.toString() === getCookie('user')) {
+    if (post_id.toString() === getCookie("user")) {
       window.alert("본인을 좋아요 할 수 없습니다.");
       return;
     }
